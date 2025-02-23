@@ -1,0 +1,35 @@
+parameters:
+    tmpDir: null
+    level: 5
+    paths:
+        - app/
+        - bootstrap/
+        - config/
+        - database/
+        - Modules/
+        - resources/
+        - routes/
+        - tests/
+
+    ignoreErrors:
+        # Undefined Properties & Methods
+        - '#Access to an undefined property .*::\$[a-zA-Z_]+#'
+        - '#Call to an undefined method .*#'
+        - '#Call to an undefined static method .*::.*#'
+        - '#Undefined variable: \$this#' # routes/console.php issue
+
+        # Unused Parameters
+        - '#Method [A-Za-z0-9_\\\\]+::[A-Za-z0-9_]+\(\) has an unused parameter \$[a-zA-Z_]+#'
+
+        # Scope Method Return Type Mismatches
+        - '#Method .*::scope[A-Za-z0-9_]+\(\) should return Illuminate\\Contracts\\Database\\Eloquent\\Builder but returns Illuminate\\Database\\Query\\Builder#'
+
+        # Sanctum & Testing Type Mismatches
+        - '#Parameter \#1 \$user of static method Laravel\\Sanctum\\Sanctum::actingAs\(\) expects Illuminate\\Contracts\\Auth\\Authenticatable\|Laravel\\Sanctum\\HasApiTokens, Illuminate\\Database\\Eloquent\\Collection<int, Illuminate\\Database\\Eloquent\\Model>\|Illuminate\\Database\\Eloquent\\Model given.#'
+        - '#Parameter \#1 \$user of method Illuminate\\Foundation\\Testing\\TestCase::actingAs\(\) expects Illuminate\\Contracts\\Auth\\Authenticatable, Illuminate\\Database\\Eloquent\\Collection<int, Illuminate\\Database\\Eloquent\\Model>\|Illuminate\\Database\\Eloquent\\Model given.#'
+        - '#Parameter \$user of method Illuminate\\Foundation\\Testing\\TestCase::actingAs\(\) expects Illuminate\\Contracts\\Auth\\Authenticatable, Illuminate\\Database\\Eloquent\\Collection<int, Illuminate\\Database\\Eloquent\\Model>\|Illuminate\\Database\\Eloquent\\Model given.#'
+
+        # Properties Written but Never Read
+        - '#Property Modules\\Core\\Models\\User::\$[a-zA-Z_]+ is never read, only written.#'
+
+    reportUnmatchedIgnoredErrors: false
