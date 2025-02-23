@@ -12,30 +12,33 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Modules\Core\Filament\Resources\CompanyResource\Pages;
 use Modules\Core\Models\Company;
+use Modules\Core\Traits\HasDropdownActions;
 
 class CompanyResource extends Resource
 {
+    use HasDropdownActions;
     protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Admin';
 
     public static function getModelLabel(): string
     {
-        return __('crud.companies.itemTitle');
+        return trans('crud.companies.itemTitle');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('crud.companies.collectionTitle');
+        return trans('crud.companies.collectionTitle');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('crud.companies.collectionTitle');
+        return trans('crud.companies.collectionTitle');
     }
 
     public static function form(Form $form): Form
@@ -55,10 +58,7 @@ class CompanyResource extends Resource
                 TextColumn::make('name')->sortable()->searchable(),
             ])
             ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
-            ])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -5,7 +5,6 @@ namespace App\Providers\Filament;
 namespace App\Providers\Filament;
 
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
-use Coolsam\Modules\ModulesPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -42,7 +41,7 @@ class FibervelPanelProvider extends PanelProvider
             ->discoverResources(in: base_path('Modules'), for: 'Modules')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
-            ->plugin(ModulesPlugin::make())
+            //->plugin(ModulesPlugin::make())
             ->pages([
                 Pages\Dashboard::class,
             ])

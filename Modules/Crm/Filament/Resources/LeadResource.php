@@ -11,15 +11,22 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Modules\Core\Traits\HasDropdownActions;
 use Modules\Crm\Filament\Resources\LeadResource\Pages\ListLeads;
 use Modules\Crm\Filament\Resources\LeadResource\RelationManagers;
 use Modules\Crm\Models\Lead;
 
 class LeadResource extends Resource
 {
+    use HasDropdownActions;
+
     protected static ?string $model = Lead::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Admin';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -43,9 +50,7 @@ class LeadResource extends Resource
             ])
             ->filters([
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

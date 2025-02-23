@@ -14,30 +14,33 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Core\Filament\Resources\UserResource\Pages;
 use Modules\Core\Models\User;
+use Modules\Core\Traits\HasDropdownActions;
 
 class UserResource extends Resource
 {
+    use HasDropdownActions;
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 99;
 
     protected static ?string $navigationGroup = 'Admin';
 
     public static function getModelLabel(): string
     {
-        return __('crud.users.itemTitle');
+        return trans('crud.users.itemTitle');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('crud.users.collectionTitle');
+        return trans('crud.users.collectionTitle');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('crud.users.collectionTitle');
+        return trans('crud.users.collectionTitle');
     }
 
     public static function form(Form $form): Form
@@ -83,10 +86,7 @@ class UserResource extends Resource
             ->poll('60s')
             ->columns([TextColumn::make('name'), TextColumn::make('email')])
             ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
-            ])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

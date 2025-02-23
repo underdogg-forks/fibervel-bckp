@@ -9,9 +9,13 @@ use Filament\Tables;
 use Filament\Tables\Actions\AttachAction;
 use Filament\Tables\Actions\DetachAction;
 use Filament\Tables\Columns\TextColumn;
+use Modules\Core\Traits\HasDropdownActions;
 
 class UsersRelationManager extends RelationManager
 {
+
+    use HasDropdownActions;
+
     protected static string $relationship = 'users';
 
     public function form(Forms\Form $form): Forms\Form

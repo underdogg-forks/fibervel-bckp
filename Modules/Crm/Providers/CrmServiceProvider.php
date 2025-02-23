@@ -2,8 +2,12 @@
 
 namespace Modules\Crm\Providers;
 
+use Filament\Panel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Crm\Filament\Resources\AccountResource;
+use Modules\Crm\Filament\Resources\ContactResource;
+use Modules\Crm\Filament\Resources\LeadResource;
 
 class CrmServiceProvider extends ServiceProvider
 {
@@ -14,7 +18,6 @@ class CrmServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerCommands();
-        $this->regResources();
         $this->registerCommandSchedules();
         $this->registerTranslations();
         $this->registerConfig();
@@ -27,16 +30,7 @@ class CrmServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
     }
 
-    private function regResources(): void
-    {
-        /*Filament::registerResources([
-            AccountResource::class,
-            LeadResource::class,
-            ContactResource::class,
-        ]);*/
-    }
-
-    /*public function panel(Panel $panel): Panel
+    public function panel(Panel $panel): Panel
     {
         return $panel
             ->resources([
@@ -44,7 +38,7 @@ class CrmServiceProvider extends ServiceProvider
                 LeadResource::class,
                 ContactResource::class,
             ]);
-    }*/
+    }
 
     public function registerTranslations(): void
     {

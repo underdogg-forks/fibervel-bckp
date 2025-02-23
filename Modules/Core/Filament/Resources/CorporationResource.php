@@ -8,12 +8,18 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Core\Filament\Resources\CorporationResource\Pages;
 use Modules\Core\Models\Corporation;
+use Modules\Core\Traits\HasDropdownActions;
 
 class CorporationResource extends Resource
 {
+    use HasDropdownActions;
+
     protected static ?string $model = Corporation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup = 'Admin';
 
     public static function form(Form $form): Form
     {
@@ -29,9 +35,7 @@ class CorporationResource extends Resource
             ])
             ->filters([
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
