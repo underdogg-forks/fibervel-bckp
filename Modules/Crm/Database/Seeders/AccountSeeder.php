@@ -4,7 +4,7 @@ namespace Modules\Crm\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Core\Models\Company;
-use Modules\Crm\Models\Account;
+use Modules\Crm\Models\Contact;
 
 class AccountSeeder extends Seeder
 {
