@@ -11,7 +11,6 @@ use Modules\Core\Traits\HasDropdownActions;
 
 class UsersRelationManager extends RelationManager
 {
-
     use HasDropdownActions;
 
     protected static string $relationship = 'users';
