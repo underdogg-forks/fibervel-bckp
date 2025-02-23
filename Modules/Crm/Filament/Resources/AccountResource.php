@@ -13,11 +13,14 @@ use Filament\Tables\Table;
 use Modules\Core\Filament\Resources\CompanyResource\RelationManagers\ContactsRelationManager;
 use Modules\Core\Filament\Resources\CompanyResource\RelationManagers\LeadsRelationManager;
 use Modules\Core\Filament\Resources\CompanyResource\RelationManagers\ProjectsRelationManager;
+use Modules\Core\Traits\HasDropdownActions;
 use Modules\Crm\Filament\Resources\AccountResource\Pages;
 use Modules\Crm\Models\Account;
 
 class AccountResource extends Resource
 {
+    use HasDropdownActions;
+
     protected static ?string $model = Account::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -28,17 +31,17 @@ class AccountResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('crud.accounts.itemTitle');
+        return trans('crud.accounts.itemTitle');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('crud.accounts.collectionTitle');
+        return trans('crud.accounts.collectionTitle');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('crud.accounts.collectionTitle');
+        return trans('crud.accounts.collectionTitle');
     }
 
     public static function form(Form $form): Form
@@ -60,10 +63,7 @@ class AccountResource extends Resource
                 TextColumn::make('phone')->sortable()->searchable(),
             ])
             ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
-            ])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

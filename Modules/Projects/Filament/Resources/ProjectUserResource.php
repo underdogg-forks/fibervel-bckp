@@ -8,11 +8,14 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Modules\Core\Traits\HasDropdownActions;
 use Modules\Projects\Filament\Resources\ProjectUserResource\Pages;
 use Modules\Projects\Models\ProjectUser;
 
 class ProjectUserResource extends Resource
 {
+    use HasDropdownActions;
+
     protected static ?string $model = ProjectUser::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -21,19 +24,20 @@ class ProjectUserResource extends Resource
 
     protected static ?string $navigationGroup = 'Admin';
 
+    protected static bool $shouldRegisterNavigation = false;
     public static function getModelLabel(): string
     {
-        return __('crud.projectUsers.itemTitle');
+        return trans('crud.projectUsers.itemTitle');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('crud.projectUsers.collectionTitle');
+        return trans('crud.projectUsers.collectionTitle');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('crud.projectUsers.collectionTitle');
+        return trans('crud.projectUsers.collectionTitle');
     }
 
     public static function form(Form $form): Form
@@ -47,12 +51,11 @@ class ProjectUserResource extends Resource
     {
         return $table
             ->poll('60s')
-            ->columns([])
-            ->filters([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
+            ->columns([
+                Tables\Columns\TextColumn::make('users.name'),
             ])
+            ->filters([])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

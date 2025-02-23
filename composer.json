@@ -18,8 +18,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.1",
-        "althinect/filament-spatie-roles-permissions": "^2.2",
-        "coolsam/modules": "^3.0",
+        "althinect/filament-spatie-roles-permissions": "^2.2.42",
         "filament/filament": "^3.2.142",
         "guzzlehttp/guzzle": "^7.9.2",
         "laravel/framework": "^10.48.28",

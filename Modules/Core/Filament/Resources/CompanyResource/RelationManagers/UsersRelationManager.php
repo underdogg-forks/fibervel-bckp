@@ -7,9 +7,13 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Modules\Core\Traits\HasDropdownActions;
 
 class UsersRelationManager extends RelationManager
 {
+
+    use HasDropdownActions;
+
     protected static string $relationship = 'users';
 
     public function form(Form $form): Form
@@ -34,10 +38,7 @@ class UsersRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
+            ->actions(static::getDropdownActions())
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
