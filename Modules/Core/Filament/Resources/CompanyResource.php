@@ -17,11 +17,13 @@ use Modules\Core\Traits\HasDropdownActions;
 class CompanyResource extends Resource
 {
     use HasDropdownActions;
+
     protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static bool $shouldRegisterNavigation = false;
+
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Admin';

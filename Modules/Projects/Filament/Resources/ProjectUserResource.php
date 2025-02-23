@@ -25,6 +25,7 @@ class ProjectUserResource extends Resource
     protected static ?string $navigationGroup = 'Admin';
 
     protected static bool $shouldRegisterNavigation = false;
+
     public static function getModelLabel(): string
     {
         return trans('crud.projectUsers.itemTitle');
